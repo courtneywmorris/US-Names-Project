@@ -2,11 +2,22 @@ from sklearn.decomposition import NMF
 import pandas as pd
 import numpy as np
 
+def run_tfidf_nmf(df, n_factors):
+    transposed_df = df.T
+    features = transposed_df.columns
+
+    W, H, nmf, error = run_nmf(transposed_df,n_factors)
+
+    print "SKlearn error: %f" %error
+    print print_top_features(W,H,features,20)#,df)
+
+    return W, H, nmf
+
 def run_nmf(df,params):
     nmf = NMF(n_components=params)
     W = nmf.fit_transform(df)
     H = nmf.components_
-    return W, H, nmf
+    return W, H, nmf, nmf.reconstruction_err_
 
 def recon_error(df, k):
     nmf = NMF(n_components=k)
@@ -18,7 +29,7 @@ def reconst_error_sum(target, left, right):
     return (np.array(target - left.dot(right))**2).sum()
 
 def print_top_features(W, H, features, top_features, data_matrix):
-    print "Reconstruction Error: %f" %reconst_mse(data_matrix, W, H)
+    print "Reconstruction Error: %f" %reconst_error_sum(data_matrix, W, H)
     for latent_num, latent in enumerate(H):
         print "Latent Feature %d" % (int(latent_num) + 1)
         print [features[i] for i in latent.argsort()[:-top_features-1:-1]]
@@ -54,14 +65,5 @@ def run_pop_nmf(df, n_factors):
 
     print "SKlearn error: %f" %error
     print print_year_diff_features(W,H,state_features,20,df)
-
-    return W, H, nmf
-
-def run_tfidf_nmf(array, n_factors, features):
-
-    W, H, nmf, error = run_nmf(df,n_factors)
-
-    print "SKlearn error: %f" %error
-    print print_top_features(W,H,features,20,array)
 
     return W, H, nmf

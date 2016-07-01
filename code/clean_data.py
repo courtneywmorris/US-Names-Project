@@ -1,6 +1,22 @@
 import pandas as pd
 
-def clean_data(df):
+def clean_data_from_csv(filename):
+    df = pd.read_csv(filename)
+    df['new_name'] = df.Name.str.lower()
+    df = df.set_index(['Year','State'])
+    df['name_gender'] = zip(df.new_name, df.Gender)
+    df = df.drop(['Year', 'State', 'new_name', 'Id', 'Name'])
+
+    date_state_series = df.groupby(df.index).sum()['Count']
+    df['tuple_index'] = df.index.values
+    df = df.join(date_state_series, how='left', on='tuple_index', lsuffix='_by_name')
+
+    df['count_norm'] = df.Count_by_name / df.Count
+
+    return df
+
+
+def clean_data_from_frame(df):
     df['new_name'] = df.Name.str.lower()
     df = df.set_index(['Year','State'])
     df['name_gender'] = zip(df.new_name, df.Gender)
