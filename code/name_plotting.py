@@ -1,4 +1,4 @@
-from collections import iteritems
+import matplotlib.pylab as plt
 
 def name_plotter(input_dict):
 #INPUT: A dictionary with keys = (name, year) and values of a dictionary with Counts for that
@@ -29,13 +29,13 @@ def plot_loop(dataframe, names_list):
     fig = plt.figure(figsize=(10,8))
 
     for name in names_list:
-        y = dataframe[dataframe.index.map(lambda x: x[0] == name)].Count.values
-        x = dataframe[dataframe.index.map(lambda x: x[0] == name)].index.map(lambda x: x[1])
-
+        y = dataframe[(dataframe.Name == name)].Count.values
+        x = dataframe[(dataframe.Name == name)].Year.values
         zipped_vals = sorted(zip(x,y))
         X,Y = zip(*zipped_vals)
 
         plt.plot(X,Y)
+        plt.show()
     plt.xlabel('Year')
     plt.ylabel('Name Count')
     plt.ylim([0,200])
