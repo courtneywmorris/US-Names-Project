@@ -14,7 +14,7 @@ The result of the model will be a list of latent features which are described by
 There are about **5x** as many unique names given to children per year today compared with a century ago. This recommendation system is a useful tool for parents to use to find new names that are not directly tied to their geographic and time proximity bias (the tendency to think more readily of names that are in their pop-culture sphere).
 
 <!-- ![alt text](images/unique_names.png =900x500) -->
-<img src="images/unique_names.png" width="500" height="300"/>
+<div style="test align: center"><img src="images/unique_names.png" width="500" height="300"/>
 
 ### Data
 
@@ -27,7 +27,7 @@ Beyond the intuitive reasoning that it is clearly helpful for additional naming
 In order to model the name relationships, I formulated a matrix for each male and female names. This allows for the analysis to focus on the latent features associated with preferences for each gender. (Interesting point: there are about **2x** as many unique female names compared to male names.) The resulting matrix was in this format which is showing the naming preferences for each state-year:
 
 <!-- ![alt text](images/matrix.png =700x600) -->
-<img src="images/matrix.png" width="400" height="350"/>
+<div style="test align: center"><img src="images/matrix.png" width="400" height="350"/>
 ### Normalization - Vectorization
 
 I normalized the data in order to limit the influence of highly popular names over time and states with large populations. I found that TF-IDF vectorization was effective for this normalization, and it appears to be a new approach to analyzing name data. Just like using TF_IDF down-weights the importance of the word “the” and longer documents in NLP, it has done the same here.
@@ -47,7 +47,7 @@ NMF also enables us to distill the data down to parts-specific latent features, 
 Let’s say I’m a to-be parent who is interested in naming my daughter something akin to my favorite Game of Thrones characters. I create a vector of names with my “votes” for each name, and run it through the model. Here the larger the name, the stronger my preference for that name.
 
 <!-- ![alt text](images/input_vector.png =850x800) -->
-<img src="images/input_vector.png" width="450" height="320"/>
+<div style="test align: center"><img src="images/input_vector.png" width="450" height="320"/>
 
 
 After transforming the vector through the model, we can rank which latent features are weighted strongest and produce a list of the year-states and names which best describe those latent features. There is now a list of new names with a geographic-timestamp to add some flavor to my naming research.
@@ -55,11 +55,11 @@ After transforming the vector through the model, we can rank which latent featur
 **Names**
 <!-- ![alt text](images/output_vector.png =850x800) -->
 
-<img src="images/output_vector.png" width="590" height="375"/>
+<div style="test align: center"><img src="images/output_vector.png" width="590" height="375"/>
 
 **Geography-Time Period**
 <!-- ![alt text](images/latent_feature2.png =1000x575) -->
-<img src="images/latent_feature2.png" width="750" height="300"/>
+<div style="test align: center"><img src="images/latent_feature2.png" width="750" height="300"/>
 
 As the map shows, the latent features from the model are often distinct groups of years and geographic regions. In this case, the populations from the upper Midwest named their daughters similarly to Game of Thrones characters. I can adjust the model to return more names, so that if I don't like the top five recommendations there are additional options for inspiration. As such, if I get a couple additional names that I like, I can update my list and input a new vector into the recommender.
 
@@ -68,6 +68,6 @@ As the map shows, the latent features from the model are often distinct groups o
 While the model incorporates time into the data by creating separate rows for each year-state combination, it would still be interesting to apply time series analysis on the latent features that are pulled from the data set. Doing so would allow for the projection of a group of names out into the future (after testing the model on subsections of data) and determine how much predictive power this adds to just projecting out single names into the future. As we can see from this figure, projecting single name popularity into the future can be noisy:
 
 <!-- ![alt_text](images/time_series.png =750x575) -->
-<img src="images/time_series.png" width="500" height="450"/>
+<div style="test align: center"><img src="images/time_series.png" width="500" height="450"/>
 
 In addition, it would be interesting to do more feature engineering with the name data. The current model uses entire names as features, and there is room to analyze the trends of phonemes that names are composed of and see what latent features arise from that factorization. This would allow for us to test compare latent features and recommendations, and indicate if it is more effective to judge preferences based on the components of a name or the name in its entirety.
