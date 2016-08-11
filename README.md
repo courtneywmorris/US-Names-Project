@@ -47,7 +47,7 @@ NMF also enables us to distill the data down to parts-specific latent features, 
 Let’s say I’m a to-be parent who is interested in naming my daughter something akin to my favorite Game of Thrones characters. I create a vector of names with my “votes” for each name, and run it through the model. Here the larger the name, the stronger my preference for that name.
 
 <!-- ![alt text](images/input_vector.png =850x800) -->
-<img src="images/input_vector.png" width="450" height="375"/>
+<img src="images/input_vector.png" width="450" height="320"/>
 
 
 After transforming the vector through the model, we can rank which latent features are weighted strongest and produce a list of the year-states and names which best describe those latent features. There is now a list of new names with a geographic-timestamp to add some flavor to my naming research.
@@ -55,11 +55,11 @@ After transforming the vector through the model, we can rank which latent featur
 **Names**
 <!-- ![alt text](images/output_vector.png =850x800) -->
 
-<img src="images/output_vector.png" width="450" height="375"/>
+<img src="images/output_vector.png" width="590" height="375"/>
 
 **Geography-Time Period**
 <!-- ![alt text](images/latent_feature2.png =1000x575) -->
-<img src="images/latent_feature2.png" width="850" height="300"/>
+<img src="images/latent_feature2.png" width="750" height="300"/>
 
 As the map shows, the latent features from the model are often distinct groups of years and geographic regions. In this case, the populations from the upper Midwest named their daughters similarly to Game of Thrones characters. I can adjust the model to return more names, so that if I don't like the top five recommendations there are additional options for inspiration. As such, if I get a couple additional names that I like, I can update my list and input a new vector into the recommender.
 
